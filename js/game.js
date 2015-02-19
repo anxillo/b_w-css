@@ -33,6 +33,8 @@ var w = {
         stop            : null,
         valid           : false,
         pawns           : 0,
+        whitePawns      : 0,
+        blackPawns      : 0,
         gameover : function () {
             if (w.field.pawns >= (w.field.totX * w.field.totY) -2 || w.field.pawns <=3)  {
                 if (w.score > w.highScore){
@@ -53,7 +55,7 @@ var w = {
                 }
             });	// -- End placing cycle
             //score render
-            $('#Scoreboard').html('<p>' + w.score + ' - Top: ' + w.highScore + '</p>');
+            $('#Scoreboard').html('<p>' + w.score + ' - Top: ' + w.highScore + '</p> W: ' + w.field.whitePawns+ ' B:' + w.field.blackPawns);
         }, // -- end render function
         move : function (dir) {
             "use strict";
@@ -69,10 +71,10 @@ var w = {
                 current = null,
                 currentColor = "",
                 currentValue = 0;
-            
+
             //firts thing check if is gameover
             w.field.gameover();
-            
+
             switch (dir) {
 			case "up":
 				dirX = 0;
@@ -94,7 +96,7 @@ var w = {
             console.log("x: " + startX + " y: " + startY + " dirX: " + dirX + " dirY: " + dirY);
             currentX = startX + dirX;
             currentY = startY + dirY;
-            
+
 		// ------ Start check if valid move -------
 
 // out of bonds: no change needed
@@ -139,10 +141,15 @@ var w = {
                 w.field.square[w.field.start].color = "";
                 w.field.square[w.field.start].value = 0;
                 w.field.pawns = w.field.pawns - 1;
-                
+                if(startColor === "white"){
+                    w.field.whitePawns--;
+                } else {
+                    w.field.blackPawns--;
+                }
+
                 w.field.addPawn(2);
                 w.field.render();
-                
+
             }
 
 //different color same value = boom
@@ -154,6 +161,8 @@ var w = {
                 w.field.square[w.field.start].color = "";
                 w.field.square[w.field.start].value = 0;
                 w.field.pawns = w.field.pawns - 2;
+                w.field.whitePawns--;
+                w.field.blackPawns--;
                 w.field.render();
             }
         }, // -- End move function
@@ -166,16 +175,29 @@ var w = {
                 console.log(rand + " - " + randValue + " -- " + i + " >-< " + w.field.pawns);
                 if (w.field.square[rand].value === 0) {
                     i++;
+                    console.log("w:" + w.field.whitePawns + " b:" + w.field.blackPawns);
                     w.field.pawns = w.field.pawns + 1;
                     w.field.square[rand].value = randValue;
-                    if (w.field.pawns % 2 === 1) {  //se dispari bianco
+                    var nextPawn = w.field.blackPawns - w.field.whitePawns;
+                    console.log(nextPawn);
+                    if(nextPawn > 0){
                         w.field.square[rand].color = "white";
-                    } else {    // se pari nero
-                        w.field.square[rand].color = "black";
+                        w.field.whitePawns++
                     }
-                    if (w.field.pawns === 0) {  //se zero bianco
+                    if(nextPawn <= 0){
                         w.field.square[rand].color = "black";
+                        w.field.blackPawns++;
                     }
+
+                    /*if(w.field.blackPawns > w.field.whitePawns){
+                    if (w.field.pawns % 2 === 1) {
+                        w.field.square[rand].color = "white";
+                        w.field.whitePawns++; */
+
+                    /*if (w.field.pawns === 0) {
+                        w.field.square[rand].color = "black";
+                        w.blackPawns++;
+                    } */
                 }
             }
         } // --End addPawn function
