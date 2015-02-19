@@ -1,0 +1,119 @@
+@CHARSET "UTF-8";
+
+@font-face {
+  font-family: OpenSans;
+  src: url('OpenSans-Regular.ttf');
+}
+@font-face { font-family: OpenSans; 
+	font-weight: bold; 
+	src: url('OpenSans-Bold.ttf');
+ }
+
+body {
+	text-align: middle;
+	-moz-user-select: none;
+	-webkit-user-select:none;
+    user-select:none;
+	cursor: default;
+	background-color: #white;
+}
+
+#Scoreboard {
+	
+	position:relative;
+	margin:auto;
+	
+	text-align: center;
+	color: black;
+	font-family: OpenSans;
+	font-size: 50px;
+	font-weight: bold;
+	
+	
+}
+
+#Container {
+	width: 600px;
+	height: 600px;
+	position: relative;
+	margin: auto;
+	
+}
+
+#Field {
+	width: 600px;
+	height: 600px;
+	position: relative;
+	Background-color: #c3c3c3;
+	border: 5px solid gray;
+	
+	
+}
+
+
+
+.Square {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	/*border: 1px solid gray; /*
+	
+	/*box-shadow: 3px 3px 3px black;*/
+	
+	
+}
+
+.Pawn {
+	width: 100px;
+	height: 100px;
+	/*background: url(player.png);*/
+	background-color: white;
+	position: absolute;
+	border-radius: 100px;
+	/*box-shadow: 3px 3px 3px black;*/
+	/*text-align: middle; */
+	box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 10px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+}
+
+.Pawn div {
+	width: 50px;
+	height: 50px;
+	margin: auto;
+	line-height: 50px;
+	position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+	color: white; 
+	font-family: OpenSans;
+	font-size: 40px;
+	font-weight: bold;
+	
+	text-align: center;
+
+
+}
+
+.selected {
+	border: 2px solid white;
+	margin: -2px;
+}
+
+.white {
+	background-color: white;
+}
+
+.white div {
+	color: black;
+	text-shadow: 2px 2px 1px white;
+}
+
+.black {
+	background-color: black;
+}
+
+.black div {
+	color: white;
+	text-shadow: 2px 2px 1px black;
+}
